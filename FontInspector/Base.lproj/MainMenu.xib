@@ -698,7 +698,7 @@
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn width="116" minWidth="40" maxWidth="1000" id="3G0-Zd-GGu">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Description">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -710,15 +710,11 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <connections>
-                                                                <binding destination="FzY-Id-Qcx" name="value" keyPath="arrangedObjects.codepoint" id="2i6-fF-YMp">
-                                                                    <dictionary key="options">
-                                                                        <string key="NSValueTransformerName">CodepointsValueTransformer</string>
-                                                                    </dictionary>
-                                                                </binding>
+                                                                <binding destination="FzY-Id-Qcx" name="value" keyPath="arrangedObjects.description" id="qGH-va-UIl"/>
                                                             </connections>
                                                         </tableColumn>
                                                         <tableColumn width="275" minWidth="40" maxWidth="1000" id="lde-yb-tuA">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Value">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -729,6 +725,9 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                            <connections>
+                                                                <binding destination="FzY-Id-Qcx" name="value" keyPath="arrangedObjects.tableValue" id="7xi-2R-FX7"/>
+                                                            </connections>
                                                         </tableColumn>
                                                     </tableColumns>
                                                     <connections>

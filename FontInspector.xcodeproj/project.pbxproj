@@ -11,6 +11,8 @@
 		C2B454941A09E5D900E31570 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2B454931A09E5D900E31570 /* Images.xcassets */; };
 		C2B454971A09E5D900E31570 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2B454951A09E5D900E31570 /* MainMenu.xib */; };
 		C2B454A31A09E5D900E31570 /* FontInspectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B454A21A09E5D900E31570 /* FontInspectorTests.swift */; };
+		C2B454B11A0AA43B00E31570 /* libicuuc.53.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B454B01A0AA43B00E31570 /* libicuuc.53.1.dylib */; };
+		C2B454B31A0AAAFF00E31570 /* CodepointNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B454B21A0AAAFF00E31570 /* CodepointNodes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +34,9 @@
 		C2B4549C1A09E5D900E31570 /* FontInspectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FontInspectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2B454A11A09E5D900E31570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2B454A21A09E5D900E31570 /* FontInspectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontInspectorTests.swift; sourceTree = "<group>"; };
+		C2B454AC1A0AA3B200E31570 /* FontInspector-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FontInspector-Bridging-Header.h"; sourceTree = "<group>"; };
+		C2B454B01A0AA43B00E31570 /* libicuuc.53.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicuuc.53.1.dylib; path = ../../../../opt/local/lib/libicuuc.53.1.dylib; sourceTree = "<group>"; };
+		C2B454B21A0AAAFF00E31570 /* CodepointNodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodepointNodes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2B454B11A0AA43B00E31570 /* libicuuc.53.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +61,7 @@
 		C2B454831A09E5D900E31570 = {
 			isa = PBXGroup;
 			children = (
+				C2B454B01A0AA43B00E31570 /* libicuuc.53.1.dylib */,
 				C2B4548E1A09E5D900E31570 /* FontInspector */,
 				C2B4549F1A09E5D900E31570 /* FontInspectorTests */,
 				C2B4548D1A09E5D900E31570 /* Products */,
@@ -77,6 +84,8 @@
 				C2B454931A09E5D900E31570 /* Images.xcassets */,
 				C2B454951A09E5D900E31570 /* MainMenu.xib */,
 				C2B4548F1A09E5D900E31570 /* Supporting Files */,
+				C2B454AC1A0AA3B200E31570 /* FontInspector-Bridging-Header.h */,
+				C2B454B21A0AAAFF00E31570 /* CodepointNodes.swift */,
 			);
 			path = FontInspector;
 			sourceTree = "<group>";
@@ -206,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2B454921A09E5D900E31570 /* AppDelegate.swift in Sources */,
+				C2B454B31A0AAAFF00E31570 /* CodepointNodes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,10 +330,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/opt/local/include,
+				);
 				INFOPLIST_FILE = FontInspector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FontInspector/FontInspector-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -331,10 +354,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/opt/local/include,
+				);
 				INFOPLIST_FILE = FontInspector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FontInspector/FontInspector-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -393,6 +428,7 @@
 				C2B454A81A09E5D900E31570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C2B454A91A09E5D900E31570 /* Build configuration list for PBXNativeTarget "FontInspectorTests" */ = {
 			isa = XCConfigurationList;
@@ -401,6 +437,7 @@
 				C2B454AB1A09E5D900E31570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
