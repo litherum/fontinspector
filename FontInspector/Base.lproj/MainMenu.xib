@@ -13,7 +13,6 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="FontInspector" customModuleProvider="target">
             <connections>
-                <outlet property="codepointController" destination="FzY-Id-Qcx" id="Ors-dY-aOZ"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -683,15 +682,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="802" height="302"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="4fr-uN-aFb">
-                                        <rect key="frame" x="0.0" y="0.0" width="399" height="302"/>
+                                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="4fr-uN-aFb" userLabel="Bordered Scroll View - Codepoints View">
+                                        <rect key="frame" x="0.0" y="0.0" width="494" height="302"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <clipView key="contentView" id="aq9-Vp-hsX">
+                                        <clipView key="contentView" misplaced="YES" id="aq9-Vp-hsX">
                                             <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="P1g-5w-EZ7" indentationPerLevel="16" outlineTableColumn="3G0-Zd-GGu" id="UsB-hv-PCQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="238" height="134"/>
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="P1g-5w-EZ7" indentationPerLevel="16" outlineTableColumn="3G0-Zd-GGu" id="UsB-hv-PCQ" userLabel="Codepoints View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="492" height="19"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -713,7 +712,7 @@
                                                                 <binding destination="FzY-Id-Qcx" name="value" keyPath="arrangedObjects.description" id="qGH-va-UIl"/>
                                                             </connections>
                                                         </tableColumn>
-                                                        <tableColumn width="275" minWidth="40" maxWidth="1000" id="lde-yb-tuA">
+                                                        <tableColumn width="370" minWidth="40" maxWidth="1000" id="lde-yb-tuA">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Value">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -742,7 +741,7 @@
                                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="9qY-uh-vxD">
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="9qY-uh-vxD">
                                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -751,10 +750,77 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
-                                    <customView fixedFrame="YES" id="lyb-ev-b35">
-                                        <rect key="frame" x="409" y="0.0" width="393" height="302"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </customView>
+                                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="Jgv-FY-oyn" userLabel="Bordered Scroll View - Glyphs View">
+                                        <rect key="frame" x="504" y="0.0" width="298" height="302"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <clipView key="contentView" misplaced="YES" id="lGD-Px-z6T">
+                                            <rect key="frame" x="1" y="0.0" width="238" height="134"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="6KP-kA-fGo" id="xih-oL-N3y" userLabel="Glyphs View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="19"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <size key="intercellSpacing" width="3" height="2"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                    <tableColumns>
+                                                        <tableColumn width="116" minWidth="40" maxWidth="1000" id="npy-Pn-jrr">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Description">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                            </tableHeaderCell>
+                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="hmK-Q2-FlA">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                            <connections>
+                                                                <binding destination="rHj-Ws-oEh" name="value" keyPath="arrangedObjects.glyph" id="30h-ct-69P"/>
+                                                            </connections>
+                                                        </tableColumn>
+                                                        <tableColumn width="174" minWidth="40" maxWidth="1000" id="eND-vO-1cr">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Value">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                            </tableHeaderCell>
+                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="2wA-Lu-5nq" customClass="GlyphTableCell" customModule="FontInspector" customModuleProvider="target">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <connections>
+                                                                    <binding destination="Voe-Tx-rLC" name="font" keyPath="font" id="BKw-J0-ohL"/>
+                                                                </connections>
+                                                            </textFieldCell>
+                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                            <connections>
+                                                                <binding destination="rHj-Ws-oEh" name="value" keyPath="arrangedObjects.glyph" id="4tm-Bq-wod"/>
+                                                            </connections>
+                                                        </tableColumn>
+                                                    </tableColumns>
+                                                    <connections>
+                                                        <binding destination="rHj-Ws-oEh" name="content" keyPath="arrangedObjects" id="W0m-cf-Jg3"/>
+                                                        <binding destination="rHj-Ws-oEh" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="W0m-cf-Jg3" id="LmM-lk-AuH"/>
+                                                    </connections>
+                                                </tableView>
+                                            </subviews>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="eOh-hG-uiF">
+                                            <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="LWI-q8-Li7">
+                                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <tableHeaderView key="headerView" id="6KP-kA-fGo">
+                                            <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableHeaderView>
+                                    </scrollView>
                                 </subviews>
                                 <holdingPriorities>
                                     <real value="250"/>
@@ -781,11 +847,16 @@
             </view>
             <point key="canvasLocation" x="516" y="502.5"/>
         </window>
-        <treeController objectClassName="FontInspector.CodepointNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="FzY-Id-Qcx">
+        <treeController objectClassName="FontInspector.CodepointNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="FzY-Id-Qcx" userLabel="Codepoints Controller">
             <connections>
                 <binding destination="Voe-Tx-rLC" name="contentArray" keyPath="codepoints" id="Cjg-Zj-nsx"/>
             </connections>
         </treeController>
         <userDefaultsController representsSharedInstance="YES" id="wNJ-HN-zDr"/>
+        <arrayController id="rHj-Ws-oEh" userLabel="Glyphs Controller">
+            <connections>
+                <binding destination="Voe-Tx-rLC" name="contentArray" keyPath="glyphs" id="FEZ-2S-afW"/>
+            </connections>
+        </arrayController>
     </objects>
 </document>

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Litherum. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 class CodepointNode: NSObject {
     let codepoint: UnicodeScalar
@@ -69,5 +69,13 @@ class PlaneNode: NSObject {
 
     func tableValue() -> String {
         return ""
+    }
+}
+
+class GlyphNode: NSObject {
+    let glyph: NSGlyph
+
+    init(glyph: NSGlyph) {
+        self.glyph = glyph
     }
 }

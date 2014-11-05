@@ -8,57 +8,22 @@
 
 import Cocoa
 
-class CodepointNumberValueTransformer : NSValueTransformer {
-    override class func transformedValueClass() -> AnyClass {
-        return NSNumber.self
-    }
-    
-    override class func allowsReverseTransformation() -> Bool {
-        return false
-    }
-    
-    override func transformedValue(value: AnyObject?) -> AnyObject? {
-        if let specificValue = value as? NSNumber {
-            return specificValue
-        }
-        return nil
-    }
-}
-
-class CodepointStringValueTransformer : NSValueTransformer {
-    override class func transformedValueClass() -> AnyClass {
-        return NSString.self
-    }
-    
-    override class func allowsReverseTransformation() -> Bool {
-        return false
-    }
-    
-    override func transformedValue(value: AnyObject?) -> AnyObject? {
-        if let specificValue = value as? NSNumber {
-            return String(UnicodeScalar(specificValue.integerValue))
-        }
-        return nil
-    }
-}
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
-    @IBOutlet weak var codepointController: NSTreeController!
 
     var font: NSFont!
     var codepoints: [PlaneNode]
+    var glyphs: [GlyphNode]
 
     override init() {
         font = NSFont(name: "American Typewriter", size: 12);
         codepoints = []
+        glyphs = []
     }
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        NSValueTransformer.setValueTransformer(CodepointNumberValueTransformer(), forName: "CodepointNumberValueTransformer")
-        NSValueTransformer.setValueTransformer(CodepointStringValueTransformer(), forName: "CodepointStringValueTransformer")
         populate()
     }
 
@@ -66,7 +31,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if font == nil {
             return
         }
+        populateCodepoints()
+        populateGlyphs()
+    }
 
+    func populateCodepoints() {
         let charset = font.coveredCharacterSet;
         for plane : UInt8 in 0 ... 16 {
             if !charset.hasMemberInPlane(plane) {
@@ -93,13 +62,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if currentCodepoints.count != 0 {
                 blocksInPlane.append(BlockNode(children: currentCodepoints, blockCode: currentBlockCode))
             }
-            codepointController.insertObject(PlaneNode(children: blocksInPlane, plane: plane), atArrangedObjectIndexPath: NSIndexPath(index: codepoints.count))
-/*
             willChange(.Insertion, valuesAtIndexes: NSIndexSet(index: codepoints.count), forKey: "codepoints")
             codepoints.append(PlaneNode(children: blocksInPlane, plane: plane))
             didChange(.Insertion, valuesAtIndexes: NSIndexSet(index: codepoints.count), forKey: "codepoints")
-*/
         }
+    }
+
+    func populateGlyphs() {
+        willChange(.Insertion, valuesAtIndexes: NSIndexSet(indexesInRange: NSMakeRange(0, font.numberOfGlyphs)), forKey: "glyphs")
+        for var glyph : NSGlyph = 0; glyphs.count < font.numberOfGlyphs; ++glyph {
+            let bbox = font.boundingRectForGlyph(glyph)
+            if (bbox.origin.x > 0 || bbox.origin.y > 0 || bbox.size.width > 0 || bbox.size.height > 0) {
+                glyphs.append(GlyphNode(glyph: glyph))
+            }
+            if Int(glyph) >= kCGGlyphMax {
+                break
+            }
+        }
+        didChange(.Insertion, valuesAtIndexes: NSIndexSet(indexesInRange: NSMakeRange(0, font.numberOfGlyphs)), forKey: "glyphs")
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
