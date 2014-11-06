@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C23E7E4A1A0B2B210074C5F3 /* GlyphTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23E7E491A0B2B210074C5F3 /* GlyphTableCell.m */; };
 		C2B454921A09E5D900E31570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B454911A09E5D900E31570 /* AppDelegate.swift */; };
 		C2B454941A09E5D900E31570 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2B454931A09E5D900E31570 /* Images.xcassets */; };
 		C2B454971A09E5D900E31570 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2B454951A09E5D900E31570 /* MainMenu.xib */; };
 		C2B454A31A09E5D900E31570 /* FontInspectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B454A21A09E5D900E31570 /* FontInspectorTests.swift */; };
 		C2B454B11A0AA43B00E31570 /* libicuuc.53.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B454B01A0AA43B00E31570 /* libicuuc.53.1.dylib */; };
 		C2B454B31A0AAAFF00E31570 /* TableNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B454B21A0AAAFF00E31570 /* TableNodes.swift */; };
-		C2B454B51A0AB67500E31570 /* GlyphTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B454B41A0AB67500E31570 /* GlyphTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +27,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C23E7E491A0B2B210074C5F3 /* GlyphTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlyphTableCell.m; sourceTree = "<group>"; };
+		C23E7E4B1A0B2B320074C5F3 /* GlyphTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlyphTableCell.h; sourceTree = "<group>"; };
 		C2B4548C1A09E5D900E31570 /* FontInspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FontInspector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2B454901A09E5D900E31570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2B454911A09E5D900E31570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +40,6 @@
 		C2B454AC1A0AA3B200E31570 /* FontInspector-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FontInspector-Bridging-Header.h"; sourceTree = "<group>"; };
 		C2B454B01A0AA43B00E31570 /* libicuuc.53.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicuuc.53.1.dylib; path = ../../../../opt/local/lib/libicuuc.53.1.dylib; sourceTree = "<group>"; };
 		C2B454B21A0AAAFF00E31570 /* TableNodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableNodes.swift; sourceTree = "<group>"; };
-		C2B454B41A0AB67500E31570 /* GlyphTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlyphTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +89,8 @@
 				C2B4548F1A09E5D900E31570 /* Supporting Files */,
 				C2B454AC1A0AA3B200E31570 /* FontInspector-Bridging-Header.h */,
 				C2B454B21A0AAAFF00E31570 /* TableNodes.swift */,
-				C2B454B41A0AB67500E31570 /* GlyphTableCell.swift */,
+				C23E7E491A0B2B210074C5F3 /* GlyphTableCell.m */,
+				C23E7E4B1A0B2B320074C5F3 /* GlyphTableCell.h */,
 			);
 			path = FontInspector;
 			sourceTree = "<group>";
@@ -219,7 +221,7 @@
 			files = (
 				C2B454921A09E5D900E31570 /* AppDelegate.swift in Sources */,
 				C2B454B31A0AAAFF00E31570 /* TableNodes.swift in Sources */,
-				C2B454B51A0AB67500E31570 /* GlyphTableCell.swift in Sources */,
+				C23E7E4A1A0B2B210074C5F3 /* GlyphTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
