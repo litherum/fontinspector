@@ -29,6 +29,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         inspectorView.bind("string", toObject: self, withKeyPath: "string", options: nil)
         inspectorView.bind("font", toObject: self, withKeyPath: "font", options: nil)
+        let fontManager = NSFontManager.sharedFontManager()
+        fontManager.setSelectedFont(font, isMultiple: false)
         populate()
     }
 
