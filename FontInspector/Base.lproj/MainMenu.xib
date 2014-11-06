@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7073.4" systemVersion="14C60" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7073.4"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -671,7 +671,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="802" height="631"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="802" height="631"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -868,13 +868,13 @@
         </window>
         <treeController objectClassName="FontInspector.CodepointNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="FzY-Id-Qcx" userLabel="Codepoints Controller">
             <connections>
-                <binding destination="Voe-Tx-rLC" name="contentArray" keyPath="codepoints" id="Cjg-Zj-nsx"/>
+                <binding destination="Voe-Tx-rLC" name="contentArray" keyPath="fontCodepoints" id="Fzx-PF-6Ft"/>
             </connections>
         </treeController>
         <userDefaultsController representsSharedInstance="YES" id="wNJ-HN-zDr"/>
         <arrayController id="rHj-Ws-oEh" userLabel="Glyphs Controller">
             <connections>
-                <binding destination="Voe-Tx-rLC" name="contentArray" keyPath="glyphs" id="FEZ-2S-afW"/>
+                <binding destination="Voe-Tx-rLC" name="contentArray" keyPath="fontGlyphs" id="EOY-aS-Iwg"/>
             </connections>
         </arrayController>
     </objects>

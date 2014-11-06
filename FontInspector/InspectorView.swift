@@ -41,6 +41,8 @@ class InspectorView : NSView {
         }
         let largeFont : NSFont! = NSFont(descriptor: font.fontDescriptor, size: font.pointSize * 10)
         let attributedString = NSAttributedString(string: string, attributes: [NSFontAttributeName: largeFont])
+        attributedString.drawInRect(bounds)
+        /*
         let textStorage = NSTextStorage(attributedString: attributedString)
         let textContainer = NSTextContainer()
         layoutManager.addTextContainer(textContainer)
@@ -51,5 +53,6 @@ class InspectorView : NSView {
         let location = NSMakePoint(0, 0/*(bounds.width - usedRect.width) / 2, (bounds.height - usedRect.height) / 2*/)
         layoutManager.drawGlyphsForGlyphRange(glyphRange, atPoint: location)
         NSBezierPath(rect: NSOffsetRect(usedRect, location.x, location.y)).stroke()
+        */
     }
 }

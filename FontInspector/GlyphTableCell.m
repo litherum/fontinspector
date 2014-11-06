@@ -41,7 +41,11 @@
 {
     CGGlyph glyph = self.integerValue;
     NSPoint point = NSMakePoint(cellFrame.origin.x, cellFrame.origin.y + cellFrame.size.height + [self.font descender]);
-    [self.layoutManager showCGGlyphs:&glyph positions:&point count:1 font:self.font matrix:[NSAffineTransform transform] attributes:@{} inContext:[NSGraphicsContext currentContext]];
+    NSGraphicsContext *context = [NSGraphicsContext currentContext];
+    [context saveGraphicsState];
+    [self.font setInContext:context];
+    [self.layoutManager showCGGlyphs:&glyph positions:&point count:1 font:self.font matrix:[NSAffineTransform transform] attributes:@{} inContext:context];
+    [context restoreGraphicsState];
 }
 
 @end
