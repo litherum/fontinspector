@@ -13,6 +13,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="FontInspector" customModuleProvider="target">
             <connections>
+                <outlet property="inspectorView" destination="rYo-3a-6mx" id="pHL-4c-1du"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -696,7 +697,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="116" minWidth="40" maxWidth="1000" id="3G0-Zd-GGu">
+                                                        <tableColumn editable="NO" width="116" minWidth="40" maxWidth="1000" id="3G0-Zd-GGu">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Description">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -712,7 +713,7 @@
                                                                 <binding destination="FzY-Id-Qcx" name="value" keyPath="arrangedObjects.description" id="qGH-va-UIl"/>
                                                             </connections>
                                                         </tableColumn>
-                                                        <tableColumn width="370" minWidth="40" maxWidth="1000" id="lde-yb-tuA">
+                                                        <tableColumn editable="NO" width="370" minWidth="40" maxWidth="1000" id="lde-yb-tuA">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Value">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -764,7 +765,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="116" minWidth="40" maxWidth="1000" id="npy-Pn-jrr">
+                                                        <tableColumn editable="NO" width="116" minWidth="40" maxWidth="1000" id="npy-Pn-jrr">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Description">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -780,7 +781,7 @@
                                                                 <binding destination="rHj-Ws-oEh" name="value" keyPath="arrangedObjects.glyph" id="30h-ct-69P"/>
                                                             </connections>
                                                         </tableColumn>
-                                                        <tableColumn width="174" minWidth="40" maxWidth="1000" id="eND-vO-1cr">
+                                                        <tableColumn editable="NO" width="174" minWidth="40" maxWidth="1000" id="eND-vO-1cr">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Value">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -827,9 +828,27 @@
                                     <real value="250"/>
                                 </holdingPriorities>
                             </splitView>
-                            <customView fixedFrame="YES" id="rYo-3a-6mx">
+                            <customView id="rYo-3a-6mx" customClass="InspectorView" customModule="FontInspector" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="312" width="802" height="319"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qaA-6J-7vf">
+                                        <rect key="frame" x="4" y="293" width="794" height="22"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ml3-uL-9vi">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="Voe-Tx-rLC" name="value" keyPath="string" id="jUL-a4-GZ6"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="qaA-6J-7vf" secondAttribute="trailing" constant="4" id="bRF-KB-TAF"/>
+                                    <constraint firstItem="qaA-6J-7vf" firstAttribute="top" secondItem="rYo-3a-6mx" secondAttribute="top" constant="4" id="hpW-rC-2Ak"/>
+                                    <constraint firstItem="qaA-6J-7vf" firstAttribute="leading" secondItem="rYo-3a-6mx" secondAttribute="leading" constant="4" id="ze7-Lq-zvq"/>
+                                </constraints>
                             </customView>
                         </subviews>
                         <holdingPriorities>

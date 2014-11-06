@@ -12,18 +12,23 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
+    @IBOutlet weak var inspectorView: InspectorView!
 
     var font: NSFont!
+    var string : String
     var codepoints: [PlaneNode]
     var glyphs: [GlyphNode]
 
     override init() {
         font = NSFont(name: "American Typewriter", size: 12);
+        string = "Hello, World"
         codepoints = []
         glyphs = []
     }
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        inspectorView.bind("string", toObject: self, withKeyPath: "string", options: nil)
+        inspectorView.bind("font", toObject: self, withKeyPath: "font", options: nil)
         populate()
     }
 
@@ -85,7 +90,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
-
-
 }
 
