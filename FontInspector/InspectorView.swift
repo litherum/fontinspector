@@ -19,14 +19,56 @@ class InspectorView : NSView {
             setNeedsDisplayInRect(bounds)
         }
     }
+    var drawsLineBounds: Bool {
+        didSet {
+            setNeedsDisplayInRect(bounds)
+        }
+    }
+    var drawsLineTypographicalBounds: Bool {
+        didSet {
+            setNeedsDisplayInRect(bounds)
+        }
+    }
+    var drawsRunBounds: Bool {
+        didSet {
+            setNeedsDisplayInRect(bounds)
+        }
+    }
+    var drawsRunTypographicalBounds: Bool {
+        didSet {
+            setNeedsDisplayInRect(bounds)
+        }
+    }
+    var drawsGlyphBounds: Bool {
+        didSet {
+            setNeedsDisplayInRect(bounds)
+        }
+    }
+    var drawsGlyphOrigins: Bool {
+        didSet {
+            setNeedsDisplayInRect(bounds)
+        }
+    }
     
     override init() {
         string = ""
+        drawsLineBounds = false
+        drawsLineTypographicalBounds = false
+        drawsRunBounds = false
+        drawsRunTypographicalBounds = false
+        drawsGlyphBounds = false
+        drawsGlyphOrigins = false
         super.init()
     }
 
     required init?(coder: NSCoder) {
         string = ""
+        drawsLineBounds = false
+        drawsLineTypographicalBounds = false
+        drawsRunBounds = false
+        drawsRunTypographicalBounds = false
+        drawsGlyphBounds = false
+        drawsGlyphOrigins = false
         super.init(coder: coder)
     }
 
@@ -52,7 +94,7 @@ class InspectorView : NSView {
 
         let imageBounds = CTLineGetImageBounds(line, context)
         var runImageBounds : [NSRect] = []
-        var runTypographicBounds : [NSRect] = []
+        var runTypographicBounds : [(NSRect, CGFloat)] = []
         var glyphBounds: [NSRect] = []
         var glyphPositions: [CGPoint] = []
 
@@ -68,7 +110,12 @@ class InspectorView : NSView {
 
             runImageBounds.append(NSOffsetRect(runBounds, runOrigin.x, runOrigin.y))
             let typographicRect = NSMakeRect(runOrigin.x, runOrigin.y - runDescent, runWidth, runHeight)
-            runTypographicBounds.append(NSOffsetRect(typographicRect, offset.width, offset.height))
+            let asdf : (NSRect, CGFloat) = (NSOffsetRect(typographicRect, offset.width, offset.height), runDescent)
+            runTypographicBounds.append(asdf)
+
+            if (CTRunGetStatus(run) & CTRunStatus.HasNonIdentityMatrix) != CTRunStatus.allZeros {
+                println("Don't know how to handle non identity run matrices")
+            }
 
             let runFont = (CTRunGetAttributes(run) as NSDictionary)[kCTFontAttributeName as NSString] as NSFont!
             if runFont != nil {
@@ -96,39 +143,53 @@ class InspectorView : NSView {
 
         CTLineDraw(line, context)
 
-        CGContextStrokeRect(context, imageBounds)
-
-        for runImageBoundsRect in runImageBounds {
-            CGContextStrokeRect(context, runImageBoundsRect)
+        if drawsLineBounds {
+            CGContextStrokeRect(context, imageBounds)
         }
 
-        for runTypographicBoundsRect in runTypographicBounds {
-            CGContextStrokeRect(context, runTypographicBoundsRect)
-        }
-
-        for glyphBoundsRect in glyphBounds {
-            CGContextStrokeRect(context, glyphBoundsRect)
-        }
-
-        /*glyphPositions.withUnsafeBufferPointer( { (pointer : UnsafeBufferPointer<CGPoint>) -> () in
-            var address = pointer.baseAddress
-            for i in 0 ..< glyphPositions.count - 1 {
-                CGContextStrokeLineSegments(context, address, 2)
-                address = address.successor()
+        if drawsRunBounds {
+            for runImageBoundsRect in runImageBounds {
+                CGContextStrokeRect(context, runImageBoundsRect)
             }
-        })*/
-        let positionRadius : CGFloat = 7
-        for glyphPosition in glyphPositions {
-            CGContextStrokeEllipseInRect(context, CGRectMake(glyphPosition.x - positionRadius / 2, glyphPosition.y - positionRadius / 2, positionRadius, positionRadius))
         }
 
-        var typographicRect = NSMakeRect(0, -typographicDescent, typographicWidth, typographicHeight)
-        typographicRect = NSOffsetRect(typographicRect, offset.width, offset.height)
-        CGContextStrokeRect(context, typographicRect)
+        if drawsRunTypographicalBounds {
+            for runTypographicBoundsRect in runTypographicBounds {
+                let rect = runTypographicBoundsRect.0
+                let descent = runTypographicBoundsRect.1
+                CGContextStrokeRect(context, rect)
+                CGContextStrokeLineSegments(context, [CGPointMake(rect.origin.x, rect.origin.y + descent), CGPointMake(CGRectGetMaxX(rect), rect.origin.y + descent)], 2)
+            }
+        }
 
-        var baselinePoints = [NSMakePoint(0, 0), NSMakePoint(typographicWidth, 0)]
-        baselinePoints = baselinePoints.map() { NSMakePoint($0.x + offset.width, $0.y + offset.height) }
-        CGContextStrokeLineSegments(context, baselinePoints, 2)
+        if drawsGlyphBounds {
+            for glyphBoundsRect in glyphBounds {
+                CGContextStrokeRect(context, glyphBoundsRect)
+            }
+        }
 
+        if drawsGlyphOrigins {
+            /*glyphPositions.withUnsafeBufferPointer( { (pointer : UnsafeBufferPointer<CGPoint>) -> () in
+                var address = pointer.baseAddress
+                for i in 0 ..< glyphPositions.count - 1 {
+                    CGContextStrokeLineSegments(context, address, 2)
+                    address = address.successor()
+                }
+            })*/
+            let positionRadius : CGFloat = 7
+            for glyphPosition in glyphPositions {
+                CGContextStrokeEllipseInRect(context, CGRectMake(glyphPosition.x - positionRadius / 2, glyphPosition.y - positionRadius / 2, positionRadius, positionRadius))
+            }
+        }
+
+        if drawsLineTypographicalBounds {
+            var typographicRect = NSMakeRect(0, -typographicDescent, typographicWidth, typographicHeight)
+            typographicRect = NSOffsetRect(typographicRect, offset.width, offset.height)
+            CGContextStrokeRect(context, typographicRect)
+
+            var baselinePoints = [NSMakePoint(0, 0), NSMakePoint(typographicWidth, 0)]
+            baselinePoints = baselinePoints.map() { NSMakePoint($0.x + offset.width, $0.y + offset.height) }
+            CGContextStrokeLineSegments(context, baselinePoints, 2)
+        }
     }
 }

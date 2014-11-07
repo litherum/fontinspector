@@ -1,5 +1,4 @@
 1. Scroll around the inspector view
-2. Checkboxes to turn on and off rects
-3. Slider for inspector view font size
-4. Modify string by modifying codepoint table
-5. Somehow be able to match glyph pictures to glyph IDs to codepoints
+2. Slider for inspector view font size
+3. Modify string by modifying codepoint table
+4. Somehow be able to match glyph pictures to glyph IDs to codepoints

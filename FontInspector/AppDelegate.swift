@@ -62,22 +62,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var stringCodepoints: [CodepointNode]
     var stringGlyphs: [GlyphNode]
 
+    var drawsLineBounds: Bool
+    var drawsLineTypographicalBounds: Bool
+    var drawsRunBounds: Bool
+    var drawsRunTypographicalBounds: Bool
+    var drawsGlyphBounds: Bool
+    var drawsGlyphOrigins: Bool
+
     override init() {
         string = ""
         fontCodepoints = []
         fontGlyphs = []
         stringCodepoints = []
         stringGlyphs = []
+        drawsLineBounds = true
+        drawsLineTypographicalBounds = true
+        drawsRunBounds = true
+        drawsRunTypographicalBounds = true
+        drawsGlyphBounds = true
+        drawsGlyphOrigins = true
         super.init()
     }
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         inspectorView.bind("string", toObject: self, withKeyPath: "string", options: nil)
         inspectorView.bind("font", toObject: self, withKeyPath: "font", options: nil)
+        inspectorView.bind("drawsLineBounds", toObject: self, withKeyPath: "drawsLineBounds", options: nil)
+        inspectorView.bind("drawsLineTypographicalBounds", toObject: self, withKeyPath: "drawsLineTypographicalBounds", options: nil)
+        inspectorView.bind("drawsRunBounds", toObject: self, withKeyPath: "drawsRunBounds", options: nil)
+        inspectorView.bind("drawsRunTypographicalBounds", toObject: self, withKeyPath: "drawsRunTypographicalBounds", options: nil)
+        inspectorView.bind("drawsGlyphBounds", toObject: self, withKeyPath: "drawsGlyphBounds", options: nil)
+        inspectorView.bind("drawsGlyphOrigins", toObject: self, withKeyPath: "drawsGlyphOrigins", options: nil)
         self.bind("stringCodepoints", toObject: self, withKeyPath: "string", options: [NSValueTransformerBindingOption: StringCodepointsValueTransformer()])
         string = "Hello, عالم!"
         font = NSFont(name: "American Typewriter", size: 12)
         populate()
+        NSFontManager.sharedFontManager().target = self
     }
 
     override func changeFont(fontManager: AnyObject?) {
