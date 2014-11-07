@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         inspectorView.bind("string", toObject: self, withKeyPath: "string", options: nil)
         inspectorView.bind("font", toObject: self, withKeyPath: "font", options: nil)
-        string = "Hello, World"
+        string = "Hello, عالم"
         font = NSFont(name: "American Typewriter", size: 12)
         populate()
     }
