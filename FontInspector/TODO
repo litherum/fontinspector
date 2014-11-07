@@ -1,4 +1,7 @@
 1. Scroll around the inspector view
 2. Slider for inspector view font size
 3. Modify string by modifying codepoint table
-4. Somehow be able to match glyph pictures to glyph IDs to codepoints
+4. Somehow be able to match glyphs to codepoints
+5. Incorporate UBA
+6. Incorporate run initial advances
+7. Show glyphs without a backing string

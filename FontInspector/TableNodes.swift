@@ -23,6 +23,12 @@ class CodepointNode: NSObject {
         return String(format: "%d", codepoint.value)
     }
 
+    func displayString() -> String {
+        var result = ""
+        result.append(codepoint)
+        return result
+    }
+
     func tableValue() -> String {
         return String(codepoint)
     }

@@ -860,6 +860,25 @@
                                                                 </binding>
                                                             </connections>
                                                         </tableColumn>
+                                                        <tableColumn width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="CAa-c6-V0q">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Value">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                            </tableHeaderCell>
+                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="luE-XA-Zcw">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <connections>
+                                                                    <binding destination="Voe-Tx-rLC" name="font" keyPath="font" id="OdX-OX-KRQ"/>
+                                                                </connections>
+                                                            </textFieldCell>
+                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                            <connections>
+                                                                <binding destination="lTs-GN-EwN" name="value" keyPath="arrangedObjects.displayString" id="Scw-Ne-ABe"/>
+                                                            </connections>
+                                                        </tableColumn>
                                                     </tableColumns>
                                                     <connections>
                                                         <binding destination="lTs-GN-EwN" name="content" keyPath="arrangedObjects" id="dMM-bK-4Vg"/>
@@ -869,7 +888,7 @@
                                             </subviews>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
-                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="jTd-ej-mO0">
+                                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="jTd-ej-mO0">
                                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
