@@ -44,6 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var inspectorView: InspectorView!
+    @IBOutlet weak var stringGlyphsController: NSArrayController!
 
     dynamic var font: NSFont! {
         didSet {
@@ -93,6 +94,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         inspectorView.bind("drawsRunTypographicalBounds", toObject: self, withKeyPath: "drawsRunTypographicalBounds", options: nil)
         inspectorView.bind("drawsGlyphBounds", toObject: self, withKeyPath: "drawsGlyphBounds", options: nil)
         inspectorView.bind("drawsGlyphOrigins", toObject: self, withKeyPath: "drawsGlyphOrigins", options: nil)
+        inspectorView.bind("selectionIndex", toObject: stringGlyphsController, withKeyPath: "selectionIndex", options: nil)
         self.bind("stringCodepoints", toObject: self, withKeyPath: "string", options: [NSValueTransformerBindingOption: StringCodepointsValueTransformer()])
         string = "Hello, عالم!"
         font = NSFont(name: "American Typewriter", size: 12)

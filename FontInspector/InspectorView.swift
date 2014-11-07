@@ -49,6 +49,12 @@ class InspectorView : NSView {
             setNeedsDisplayInRect(bounds)
         }
     }
+    var selectionIndex: Int {
+        didSet {
+            setNeedsDisplayInRect(bounds)
+        }
+    }
+    let selectionColor: CGColorRef
     
     override init() {
         string = ""
@@ -58,6 +64,8 @@ class InspectorView : NSView {
         drawsRunTypographicalBounds = false
         drawsGlyphBounds = false
         drawsGlyphOrigins = false
+        selectionIndex = 0
+        selectionColor = NSColor.redColor().CGColor
         super.init()
     }
 
@@ -69,6 +77,8 @@ class InspectorView : NSView {
         drawsRunTypographicalBounds = false
         drawsGlyphBounds = false
         drawsGlyphOrigins = false
+        selectionIndex = 0
+        selectionColor = NSColor.redColor().CGColor
         super.init(coder: coder)
     }
 
@@ -141,7 +151,36 @@ class InspectorView : NSView {
         }
         glyphPositions = glyphPositions.map { CGPointMake($0.x + offset.width, $0.y + offset.height) }
 
-        CTLineDraw(line, context)
+        var startingGlyph = 0
+        for run in CTLineGetGlyphRuns(line) as [CTRunRef] {
+            let glyphCount = CTRunGetGlyphCount(run)
+            let runFont = (CTRunGetAttributes(run) as NSDictionary)[kCTFontAttributeName as NSString] as NSFont!
+            if runFont != nil && selectionIndex >= startingGlyph && selectionIndex < startingGlyph + glyphCount {
+                var glyphs = Array<CGGlyph>(count: glyphCount, repeatedValue: CGGlyph(0))
+                glyphs.withUnsafeMutableBufferPointer({ (inout pointer : UnsafeMutableBufferPointer<CGGlyph>) in
+                    CTRunGetGlyphs(run, CFRangeMake(0, 0), pointer.baseAddress)
+                })
+                var positions = Array<CGPoint>(count: glyphCount, repeatedValue: CGPointZero)
+                positions.withUnsafeMutableBufferPointer({ (inout pointer : UnsafeMutableBufferPointer<CGPoint>) in
+                    CTRunGetPositions(run, CFRangeMake(0, 0), pointer.baseAddress)
+                })
+                glyphs.withUnsafeBufferPointer( { (glyphsPointer : UnsafeBufferPointer<CGGlyph>) -> () in
+                    var glyphsAddress = glyphsPointer.baseAddress
+                    positions.withUnsafeBufferPointer( { (positionsPointer : UnsafeBufferPointer<CGPoint>) -> () in
+                        var positionsAddress = positionsPointer.baseAddress
+                        CTFontDrawGlyphs(runFont, glyphsAddress, positions, UInt(self.selectionIndex - startingGlyph), context)
+                        CGContextSaveGState(context)
+                        CGContextSetFillColorWithColor(context, self.selectionColor)
+                        CTFontDrawGlyphs(runFont, glyphsAddress.advancedBy(self.selectionIndex - startingGlyph), positionsAddress.advancedBy(self.selectionIndex - startingGlyph), 1, context)
+                        CGContextRestoreGState(context)
+                        CTFontDrawGlyphs(runFont, glyphsAddress.advancedBy(self.selectionIndex - startingGlyph + 1), positionsAddress.advancedBy(self.selectionIndex - startingGlyph + 1), UInt(startingGlyph + glyphCount - self.selectionIndex - 1), context)
+                    })
+                })
+            } else {
+                CTRunDraw(run, context, CFRangeMake(0, 0))
+            }
+            startingGlyph += glyphCount
+        }
 
         if drawsLineBounds {
             CGContextStrokeRect(context, imageBounds)
@@ -163,8 +202,16 @@ class InspectorView : NSView {
         }
 
         if drawsGlyphBounds {
-            for glyphBoundsRect in glyphBounds {
+            for i in 0 ..< glyphBounds.count {
+            let glyphBoundsRect = glyphBounds[i]
+                if i == selectionIndex {
+                    CGContextSaveGState(context)
+                    CGContextSetStrokeColorWithColor(context, selectionColor)
+                }
                 CGContextStrokeRect(context, glyphBoundsRect)
+                if i == selectionIndex {
+                    CGContextRestoreGState(context)
+                }
             }
         }
 
@@ -177,8 +224,16 @@ class InspectorView : NSView {
                 }
             })*/
             let positionRadius : CGFloat = 7
-            for glyphPosition in glyphPositions {
+            for i in 0 ..< glyphPositions.count {
+                let glyphPosition = glyphPositions[i]
+                if i == selectionIndex {
+                    CGContextSaveGState(context)
+                    CGContextSetStrokeColorWithColor(context, selectionColor)
+                }
                 CGContextStrokeEllipseInRect(context, CGRectMake(glyphPosition.x - positionRadius / 2, glyphPosition.y - positionRadius / 2, positionRadius, positionRadius))
+                if i == selectionIndex {
+                    CGContextRestoreGState(context)
+                }
             }
         }
 
