@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C6957811A0C0491002C9D19 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6957801A0C0491002C9D19 /* main.m */; };
+		1CA5BF081A0C7BBF0022B3B4 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 1CA5BF071A0C7BBF0022B3B4 /* TODO */; };
 		C23E7E4A1A0B2B210074C5F3 /* GlyphTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23E7E491A0B2B210074C5F3 /* GlyphTableCell.m */; };
 		C23E7E4D1A0B36530074C5F3 /* InspectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23E7E4C1A0B36530074C5F3 /* InspectorView.swift */; };
 		C2B454921A09E5D900E31570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B454911A09E5D900E31570 /* AppDelegate.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		1C6957801A0C0491002C9D19 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1CA5BF071A0C7BBF0022B3B4 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		C23E7E491A0B2B210074C5F3 /* GlyphTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlyphTableCell.m; sourceTree = "<group>"; };
 		C23E7E4B1A0B2B320074C5F3 /* GlyphTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlyphTableCell.h; sourceTree = "<group>"; };
 		C23E7E4C1A0B36530074C5F3 /* InspectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				C23E7E491A0B2B210074C5F3 /* GlyphTableCell.m */,
 				C23E7E4B1A0B2B320074C5F3 /* GlyphTableCell.h */,
 				C23E7E4C1A0B36530074C5F3 /* InspectorView.swift */,
+				1CA5BF071A0C7BBF0022B3B4 /* TODO */,
 			);
 			path = FontInspector;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CA5BF081A0C7BBF0022B3B4 /* TODO in Resources */,
 				C2B454941A09E5D900E31570 /* Images.xcassets in Resources */,
 				C2B454971A09E5D900E31570 /* MainMenu.xib in Resources */,
 			);

@@ -79,3 +79,19 @@ class GlyphNode: NSObject {
         self.glyph = glyph
     }
 }
+
+class GlyphDetailNode: GlyphNode {
+    let font: NSFont
+    let run: UInt
+    var fontName : String {
+        get {
+            return font.displayName!
+        }
+    }
+
+    init(glyph: NSGlyph, font: NSFont, run: UInt) {
+        self.font = font
+        self.run = run
+        super.init(glyph: glyph)
+    }
+}

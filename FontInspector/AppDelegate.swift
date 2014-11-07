@@ -8,6 +8,38 @@
 
 import Cocoa
 
+class StringCodepointsValueTransformer : NSValueTransformer {
+    override class func transformedValueClass() -> AnyClass {
+        return NSArray.self
+    }
+
+    override class func allowsReverseTransformation() -> Bool {
+        return true
+    }
+
+    override func transformedValue(value: AnyObject?) -> AnyObject? {
+        if let string = value as? String {
+            var result : [CodepointNode] = []
+            for codepoint in string.unicodeScalars {
+                result.append(CodepointNode(codepoint: codepoint))
+            }
+            return result as NSArray
+        }
+        return nil
+    }
+
+    override func reverseTransformedValue(value: AnyObject?) -> AnyObject? {
+        if let array = value as? [CodepointNode] {
+            var result = ""
+            for codepoint in array {
+                result.append(codepoint.codepoint)
+            }
+            return result
+        }
+        return nil
+    }
+}
+
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
@@ -20,20 +52,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    dynamic var string : String
+    dynamic var string : String {
+        didSet {
+            populate()
+        }
+    }
     var fontCodepoints: [PlaneNode]
     var fontGlyphs: [GlyphNode]
+    var stringCodepoints: [CodepointNode]
+    var stringGlyphs: [GlyphNode]
 
     override init() {
         string = ""
         fontCodepoints = []
         fontGlyphs = []
+        stringCodepoints = []
+        stringGlyphs = []
+        super.init()
     }
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         inspectorView.bind("string", toObject: self, withKeyPath: "string", options: nil)
         inspectorView.bind("font", toObject: self, withKeyPath: "font", options: nil)
-        string = "Hello, عالم"
+        self.bind("stringCodepoints", toObject: self, withKeyPath: "string", options: [NSValueTransformerBindingOption: StringCodepointsValueTransformer()])
+        string = "Hello, عالم!"
         font = NSFont(name: "American Typewriter", size: 12)
         populate()
     }
@@ -47,6 +89,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func populate() {
         populateCodepoints()
         populateGlyphs()
+        populateStringGlyphs()
     }
 
     func populateCodepoints() {
@@ -86,7 +129,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func populateGlyphs() {
-        willChange(.Insertion, valuesAtIndexes: NSIndexSet(indexesInRange: NSMakeRange(0, font.numberOfGlyphs)), forKey: "fontGlyphs")
+        willChange(.Replacement, valuesAtIndexes: NSIndexSet(indexesInRange: NSMakeRange(0, fontGlyphs.count)), forKey: "fontGlyphs")
         fontGlyphs.removeAll()
         if font != nil {
             for var glyph : NSGlyph = 0; fontGlyphs.count < font.numberOfGlyphs; ++glyph {
@@ -99,7 +142,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
         }
-        didChange(.Insertion, valuesAtIndexes: NSIndexSet(indexesInRange: NSMakeRange(0, font.numberOfGlyphs)), forKey: "fontGlyphs")
+        didChange(.Replacement, valuesAtIndexes: NSIndexSet(indexesInRange: NSMakeRange(0, fontGlyphs.count)), forKey: "fontGlyphs")
+    }
+
+    func populateStringGlyphs() {
+        willChange(.Replacement, valuesAtIndexes: NSIndexSet(indexesInRange: NSMakeRange(0, stringGlyphs.count)), forKey: "stringGlyphs")
+        stringGlyphs.removeAll()
+        if font != nil {
+            let attributedString = NSAttributedString(string: string, attributes: [NSFontAttributeName: font])
+            let line = CTLineCreateWithAttributedString(attributedString)
+            var i : UInt = 0
+            let runs = CTLineGetGlyphRuns(line) as NSArray
+            for i in 0 ..< runs.count {
+                let run = runs[i] as CTRunRef
+                let runFont = (CTRunGetAttributes(run) as NSDictionary)[kCTFontAttributeName as NSString] as NSFont!
+                let glyphCount = CTRunGetGlyphCount(run)
+                var glyphs = Array<CGGlyph>(count: glyphCount, repeatedValue: CGGlyph(0))
+                glyphs.withUnsafeMutableBufferPointer({ (inout pointer : UnsafeMutableBufferPointer<CGGlyph>) in
+                    CTRunGetGlyphs(run, CFRangeMake(0, 0), pointer.baseAddress)
+                })
+                stringGlyphs.extend(glyphs.map() { GlyphDetailNode(glyph: NSGlyph($0), font: runFont, run: UInt(i)) })
+            }
+        }
+        didChange(.Replacement, valuesAtIndexes: NSIndexSet(indexesInRange: NSMakeRange(0, stringGlyphs.count)), forKey: "stringGlyphs")
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
